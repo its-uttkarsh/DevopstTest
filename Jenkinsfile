@@ -13,8 +13,19 @@ pipeline {
     }
 
     stage('Test') {
-      steps {
-        sh 'test -f index.html'
+      parallel {
+        stage('Test') {
+          steps {
+            sh 'test -f index.html'
+          }
+        }
+
+        stage('Test1') {
+          steps {
+            echo 'test1'
+          }
+        }
+
       }
     }
 
