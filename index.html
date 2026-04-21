@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DevOps Dashboard – Monitor pipelines, deployments, and system metrics in real time." />
+  <title>DevOps Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body data-theme="dark">
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand">
+      <span class="brand-icon">⚙</span>
+      <span class="brand-name">DevOps<span class="accent">Hub</span></span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home"     class="nav-link active" data-section="home">Home</a></li>
+      <li><a href="#pipeline" class="nav-link"        data-section="pipeline">Pipeline</a></li>
+      <li><a href="#metrics"  class="nav-link"        data-section="metrics">Metrics</a></li>
+      <li><a href="#logs"     class="nav-link"        data-section="logs">Logs</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
+      <button class="btn-primary" id="deployBtn">🚀 Deploy</button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="badge">● Live System</div>
+      <h1>DevOps <span class="gradient-text">Command Center</span></h1>
+      <p class="hero-sub">Monitor pipelines, track deployments, and keep your infrastructure healthy — all in one place.</p>
+      <div class="hero-btns">
+        <a href="#pipeline" class="btn-primary">View Pipeline</a>
+        <a href="#metrics"  class="btn-outline">System Metrics</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="terminal" id="heroTerminal">
+        <div class="term-bar"><span></span><span></span><span></span></div>
+        <div class="term-body" id="termBody"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATS STRIP ── -->
+  <section class="stats-strip">
+    <div class="stat-card">
+      <span class="stat-num" data-target="99.97">0</span><span class="stat-unit">%</span>
+      <p>Uptime</p>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num" data-target="142">0</span>
+      <p>Deployments This Month</p>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num" data-target="8">0</span><span class="stat-unit">ms</span>
+      <p>Avg Response Time</p>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num" data-target="3">0</span>
+      <p>Active Pipelines</p>
+    </div>
+  </section>
+
+  <!-- ── PIPELINE ── -->
+  <section class="section" id="pipeline">
+    <h2 class="section-title">CI/CD <span class="accent">Pipeline</span></h2>
+    <p class="section-sub">Current build status across your projects.</p>
+
+    <div class="pipeline-grid">
+
+      <div class="pipeline-card" id="pipe-main">
+        <div class="pipe-header">
+          <span class="pipe-name">main-service</span>
+          <span class="pipe-branch">🌿 main</span>
+          <span class="pipe-status running" id="pipe-main-status">Running</span>
+        </div>
+        <div class="pipe-stages">
+          <div class="stage done"   data-tip="Checkout">Checkout</div>
+          <div class="stage done"   data-tip="Build">Build</div>
+          <div class="stage active" data-tip="Test">Test</div>
+          <div class="stage"        data-tip="Docker">Docker</div>
+          <div class="stage"        data-tip="Deploy">Deploy</div>
+        </div>
+        <div class="pipe-progress-bar"><div class="pipe-fill" style="width:55%"></div></div>
+        <div class="pipe-meta">Triggered by <strong>Lena Kim</strong> · 3m ago</div>
+      </div>
+
+      <div class="pipeline-card">
+        <div class="pipe-header">
+          <span class="pipe-name">auth-service</span>
+          <span class="pipe-branch">🌿 release/2.4</span>
+          <span class="pipe-status success">Success</span>
+        </div>
+        <div class="pipe-stages">
+          <div class="stage done">Checkout</div>
+          <div class="stage done">Build</div>
+          <div class="stage done">Test</div>
+          <div class="stage done">Docker</div>
+          <div class="stage done">Deploy</div>
+        </div>
+        <div class="pipe-progress-bar"><div class="pipe-fill success-fill" style="width:100%"></div></div>
+        <div class="pipe-meta">Triggered by <strong>Raj Patel</strong> · 18m ago</div>
+      </div>
+
+      <div class="pipeline-card">
+        <div class="pipe-header">
+          <span class="pipe-name">data-pipeline</span>
+          <span class="pipe-branch">🌿 feature/cache</span>
+          <span class="pipe-status failed">Failed</span>
+        </div>
+        <div class="pipe-stages">
+          <div class="stage done">Checkout</div>
+          <div class="stage done">Build</div>
+          <div class="stage failed-stage">Test</div>
+          <div class="stage">Docker</div>
+          <div class="stage">Deploy</div>
+        </div>
+        <div class="pipe-progress-bar"><div class="pipe-fill fail-fill" style="width:40%"></div></div>
+        <div class="pipe-meta">Triggered by <strong>Sam Torres</strong> · 42m ago</div>
+      </div>
+
+    </div>
+
+    <!-- Run Pipeline Button -->
+    <div class="center-action">
+      <button class="btn-primary" id="runPipelineBtn">▶ Run New Pipeline</button>
+    </div>
+  </section>
+
+  <!-- ── METRICS ── -->
+  <section class="section alt-bg" id="metrics">
+    <h2 class="section-title">System <span class="accent">Metrics</span></h2>
+    <p class="section-sub">Live resource usage across your servers.</p>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-header">
+          <span>🖥 CPU Usage</span>
+          <span class="metric-val" id="cpuVal">--</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill cpu-bar" id="cpuBar"></div></div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-header">
+          <span>🧠 Memory</span>
+          <span class="metric-val" id="memVal">--</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill mem-bar" id="memBar"></div></div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-header">
+          <span>💾 Disk I/O</span>
+          <span class="metric-val" id="diskVal">--</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill disk-bar" id="diskBar"></div></div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-header">
+          <span>🌐 Network</span>
+          <span class="metric-val" id="netVal">--</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill net-bar" id="netBar"></div></div>
+      </div>
+    </div>
+
+    <p class="refresh-note">⟳ Metrics refresh every 4 seconds</p>
+  </section>
+
+  <!-- ── LOGS ── -->
+  <section class="section" id="logs">
+    <h2 class="section-title">Deployment <span class="accent">Logs</span></h2>
+    <p class="section-sub">Latest activity from your deployments.</p>
+
+    <div class="log-terminal">
+      <div class="term-bar"><span></span><span></span><span></span><span class="term-title">deployment.log</span></div>
+      <div class="log-body" id="logBody"></div>
+    </div>
+    <div class="log-actions">
+      <button class="btn-outline" id="clearLogsBtn">🗑 Clear Logs</button>
+      <button class="btn-primary" id="addLogBtn">+ Add Entry</button>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="brand-name">DevOps<span class="accent">Hub</span></span>
+      <p>© 2026 DevOpsHub · Built for your infrastructure</p>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#pipeline">Pipeline</a>
+        <a href="#metrics">Metrics</a>
+        <a href="#logs">Logs</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── DEPLOY MODAL ── -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <h3>🚀 Trigger Deployment</h3>
+      <label>Service
+        <select id="deployService">
+          <option>main-service</option>
+          <option>auth-service</option>
+          <option>data-pipeline</option>
+        </select>
+      </label>
+      <label>Environment
+        <select id="deployEnv">
+          <option>Production</option>
+          <option>Staging</option>
+          <option>Development</option>
+        </select>
+      </label>
+      <div class="modal-btns">
+        <button class="btn-outline" id="cancelDeploy">Cancel</button>
+        <button class="btn-primary" id="confirmDeploy">Deploy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TOAST ── -->
+  <div class="toast" id="toast"></div>
+
+  <script src="index.js"></script>
+</body>
+</html>
