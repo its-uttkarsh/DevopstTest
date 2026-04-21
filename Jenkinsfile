@@ -6,15 +6,15 @@ pipeline {
 
   }
   stages {
-    stage('devops1') {
+    stage('Build') {
       steps {
         bat 'echo "Deploying Application"'
       }
     }
 
-    stage('devops2') {
+    stage('Test') {
       steps {
-        echo 'print(devops2)'
+        sh 'test -f index.html'
       }
     }
 
