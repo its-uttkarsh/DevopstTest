@@ -12,5 +12,11 @@ pipeline {
       }
     }
 
+    stage('devops2') {
+      steps {
+        echo 'print(devops2)'
+      }
+    }
+
   }
 }
