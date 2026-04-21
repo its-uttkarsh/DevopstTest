@@ -6,11 +6,9 @@ pipeline {
 
   }
   stages {
-    stage('devopstest') {
+    stage('devops1') {
       steps {
-        echo 'test application'
-        error 'there\'s an error'
-        bat 'echo "Deploying application"'
+        bat 'echo "Deploying Application"'
       }
     }
 
