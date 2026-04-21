@@ -1,7 +1,7 @@
 pipeline {
   agent {
     node {
-      label 'start'
+      label 'index '
     }
 
   }
@@ -18,5 +18,9 @@ pipeline {
       }
     }
 
+  }
+  environment {
+    a = '1'
+    b = '2'
   }
 }
